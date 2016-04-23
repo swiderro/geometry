@@ -1,4 +1,4 @@
-package com.marcinswiderski.portfolio.bootstrap.commandLine;
+package com.marcinswiderski.portfolio.areacalculator.bootstrap.commandline;
 
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -38,5 +38,13 @@ public class Worker {
     public Worker giveInitialMessage() {
         output.println(initialMessage);
         return this;
+    }
+
+    public String getPrompt() {
+        return prompt;
+    }
+
+    public String getInitialMessage() {
+        return initialMessage;
     }
 }

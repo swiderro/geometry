@@ -1,4 +1,4 @@
-package com.marcinswiderski.portfolio.bootstrap.commandLine;
+package com.marcinswiderski.portfolio.areacalculator.bootstrap.commandline;
 
 import java.util.Scanner;
 
