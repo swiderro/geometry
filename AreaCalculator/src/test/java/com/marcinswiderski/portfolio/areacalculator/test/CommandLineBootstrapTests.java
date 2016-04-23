@@ -13,7 +13,7 @@ import java.util.Scanner;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
-public class CommandLineBootstrapTest {
+public class CommandLineBootstrapTests {
 
     @Test
     public void WorkerWorkingOnCreationTest() {
