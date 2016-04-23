@@ -1,6 +1,6 @@
 package com.marcinswiderski.portfolio.areacalculator.test;
 
-import com.marcinswiderski.portfolio.model.Command;
+import com.marcinswiderski.portfolio.areacalculator.model.Command;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;
@@ -34,7 +34,7 @@ public class CommandTests {
 
     @Test
     public void parseShowAllCommandTest() {
-        String commandString = "showAll";
+        String commandString = "showall";
         Command command = Command.valueOf(commandString);
         assertNotNull(command);
         assertTrue(command.name().equalsIgnoreCase(commandString));

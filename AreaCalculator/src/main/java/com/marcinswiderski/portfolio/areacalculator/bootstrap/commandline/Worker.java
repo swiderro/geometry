@@ -1,5 +1,7 @@
 package com.marcinswiderski.portfolio.areacalculator.bootstrap.commandline;
 
+import com.marcinswiderski.portfolio.areacalculator.model.InputParser;
+
 import java.io.PrintStream;
 import java.util.Scanner;
 
@@ -9,7 +11,7 @@ public class Worker {
     private boolean working;
     private String prompt;
     private String initialMessage;
-    private String commandSeparator;
+    private InputParser inputParser;
 
     public Worker(Scanner scanner, PrintStream out) {
         this.scanner = scanner;
@@ -17,7 +19,7 @@ public class Worker {
         working = true;
         prompt = "calculator > ";
         initialMessage = "Welcome to Area Calculator. Please enter a command.";
-        commandSeparator = " ";
+        inputParser = new InputParser();
     }
 
     public boolean isWorking() {
@@ -31,7 +33,12 @@ public class Worker {
 
     public Worker takeCommand() {
         String commandString = scanner.nextLine();
-        String[] splittedCommand = commandString.split(commandSeparator);
+        try {
+            inputParser.parse(commandString);
+        } catch (RuntimeException runtimeException) {
+            output.println(runtimeException.getMessage());
+        }
+
         return this;
     }
 
