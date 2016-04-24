@@ -1,6 +1,6 @@
 package com.marcinswiderski.portfolio.areacalculator.model;
 
-import com.marcinswiderski.portfolio.areacalculator.exception.IllegalArgumentNumberForCommandException;
+import com.marcinswiderski.portfolio.areacalculator.exception.IllegalArgumentNumberForFigureAreaException;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -21,7 +21,7 @@ public class CommandParser {
         this.command = null;
     }
 
-    public CommandParser parse(String inputLine) throws IllegalArgumentNumberForCommandException {
+    public CommandParser parse(String inputLine) throws IllegalArgumentNumberForFigureAreaException {
         List<String> inputLineExploded = new LinkedList<String>(Arrays.asList(inputLine.split(separator)));
         extractCommand(inputLineExploded);
 //        validateArgumentsNumber(inputLineExploded);

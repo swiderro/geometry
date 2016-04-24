@@ -2,6 +2,7 @@ package com.marcinswiderski.portfolio.areacalculator.test;
 
 import com.marcinswiderski.portfolio.areacalculator.controller.ScannerPrintStreamController;
 import com.marcinswiderski.portfolio.areacalculator.model.Command;
+import com.marcinswiderski.portfolio.areacalculator.model.Figure;
 import com.marcinswiderski.portfolio.areacalculator.model.HelloCommandModel;
 import org.junit.Test;
 
@@ -59,6 +60,29 @@ public class CommandExecutionTests {
                 twoToThirteenth
         );
         assertFalse(scannerPrintStreamController.isWorking());
+    }
+
+
+    @Test
+    public void ControllerTakeAndExecuteAreaCommandTest() throws IOException {
+        PrintStream mockedOutput = mock(PrintStream.class);
+        String command = Command.area.name() + " " + Figure.circle.name() + " 1\n";
+        byte[] commandBytes = command.getBytes();
+        InputStream inputStream = new ByteArrayInputStream(commandBytes);
+        InputStream inputStreamSpy = spy(inputStream);
+        Scanner mockedScanner = new Scanner(inputStreamSpy);
+        ScannerPrintStreamController scannerPrintStreamController =
+                new ScannerPrintStreamController(mockedScanner, mockedOutput);
+        scannerPrintStreamController.takeAndExecuteCommand();
+        //BARK!!!
+        int twoToThirteenth = 8192;
+        byte[] bytesRead = Arrays.copyOf(commandBytes, twoToThirteenth);
+        verify(inputStreamSpy).read(
+                bytesRead,
+                0,
+                twoToThirteenth
+        );
+        verify(mockedOutput).println(Double.toString(1 * 1 * Math.PI));
     }
 
 }
