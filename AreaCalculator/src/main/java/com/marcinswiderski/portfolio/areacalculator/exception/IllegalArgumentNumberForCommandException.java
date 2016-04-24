@@ -4,6 +4,8 @@ import com.marcinswiderski.portfolio.areacalculator.model.Command;
 
 public class IllegalArgumentNumberForCommandException extends RuntimeException {
     public IllegalArgumentNumberForCommandException(Command command) {
-        super("Command " + command.name() + " takes " + command.getMaxArgumentsNumber() + " arguments.");
+        super("Command " + command.name() + " takes from " +
+                command.getMaxArgumentsNumber() + " to " +
+                command.getMaxArgumentsNumber() + " arguments.");
     }
 }
