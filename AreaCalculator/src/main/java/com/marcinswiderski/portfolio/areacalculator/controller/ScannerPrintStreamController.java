@@ -7,6 +7,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 public class ScannerPrintStreamController {
+    private static final Command FINISH_METHOD = Command.exit;
     private final PrintStream output;
     private final Scanner scanner;
     private boolean working;
@@ -40,10 +41,14 @@ public class ScannerPrintStreamController {
         String commandString = scanner.nextLine();
         try {
             Command command = commandParser.parse(commandString).getCommand();
-            CommandModel commandModel = CommandModelFactory.getCommandModel(command);
-            Result result = commandModel.execute(commandParser.getCommandArguments());
-            View view = commandModel.getView();
-            output.println(view.getFormattedResult(result));
+            if (command != FINISH_METHOD) {
+                CommandModel commandModel = CommandModelFactory.getCommandModel(command);
+                Result result = commandModel.execute(commandParser.getCommandArguments());
+                View view = commandModel.getView();
+                output.println(view.getFormattedResult(result));
+            } else {
+                this.working = false;
+            }
         } catch (RuntimeException runtimeException) {
             output.println(runtimeException.getMessage());
         }
