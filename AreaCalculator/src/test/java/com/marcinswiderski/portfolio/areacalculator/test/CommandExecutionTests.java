@@ -1,9 +1,7 @@
 package com.marcinswiderski.portfolio.areacalculator.test;
 
 import com.marcinswiderski.portfolio.areacalculator.controller.ScannerPrintStreamController;
-import com.marcinswiderski.portfolio.areacalculator.model.command.Command;
 import com.marcinswiderski.portfolio.areacalculator.model.command.hello.HelloCommandModel;
-import com.marcinswiderski.portfolio.areacalculator.model.figure.Figure;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -12,7 +10,10 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
+import static com.marcinswiderski.portfolio.areacalculator.model.command.Command.*;
+import static com.marcinswiderski.portfolio.areacalculator.model.figure.Figure.*;
 import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.*;
 
@@ -21,7 +22,7 @@ public class CommandExecutionTests {
     @Test
     public void ControllerTakeAndExecuteHelloCommandTest() throws IOException {
         PrintStream mockedOutput = mock(PrintStream.class);
-        String command = Command.hello.name() + "\n";
+        String command = hello.name() + "\n";
         byte[] commandBytes = command.getBytes();
         InputStream inputStream = new ByteArrayInputStream(commandBytes);
         InputStream inputStreamSpy = spy(inputStream);
@@ -43,7 +44,7 @@ public class CommandExecutionTests {
     @Test
     public void ControllerTakeAndExecuteExitCommandTest() throws IOException {
         PrintStream mockedOutput = mock(PrintStream.class);
-        String command = Command.exit.name() + "\n";
+        String command = exit.name() + "\n";
         byte[] commandBytes = command.getBytes();
         InputStream inputStream = new ByteArrayInputStream(commandBytes);
         InputStream inputStreamSpy = spy(inputStream);
@@ -63,16 +64,24 @@ public class CommandExecutionTests {
     }
 
     @Test
-    public void ControllerTakeAndExecuteCircleAreaCommandTest() throws IOException {
+    public void ControllerTakeAndExecuteAreaCommandTest() throws IOException {
         PrintStream mockedOutput = mock(PrintStream.class);
-        String command = Command.area.name() + " " + Figure.circle.name() + " 1\n";
-        byte[] commandBytes = command.getBytes();
+        String[] commands = new String[]{
+                hello.name() + "\n",
+                area.name() + " " + rectangle.name() + " 2 3\n",
+                area.name() + " " + square.name() + " 2\n",
+                area.name() + " " + circle.name() + " 1\n",
+                exit.name() + "\n"
+        };
+        byte[] commandBytes = (Arrays.asList(commands).stream().collect(Collectors.joining())).getBytes();
         InputStream inputStream = new ByteArrayInputStream(commandBytes);
         InputStream inputStreamSpy = spy(inputStream);
         Scanner mockedScanner = new Scanner(inputStreamSpy);
         ScannerPrintStreamController scannerPrintStreamController =
                 new ScannerPrintStreamController(mockedScanner, mockedOutput);
-        scannerPrintStreamController.takeAndExecuteCommand();
+        for (String command : commands) {
+            scannerPrintStreamController.takeAndExecuteCommand();
+        }
         //BARK!!!
         int twoToThirteenth = 8192;
         byte[] bytesRead = Arrays.copyOf(commandBytes, twoToThirteenth);
@@ -81,51 +90,11 @@ public class CommandExecutionTests {
                 0,
                 twoToThirteenth
         );
-        verify(mockedOutput).println(Double.toString(1 * 1 * Math.PI));
-    }
-
-    @Test
-    public void ControllerTakeAndExecuteSquareAreaCommandTest() throws IOException {
-        PrintStream mockedOutput = mock(PrintStream.class);
-        String command = Command.area.name() + " " + Figure.square.name() + " 2\n";
-        byte[] commandBytes = command.getBytes();
-        InputStream inputStream = new ByteArrayInputStream(commandBytes);
-        InputStream inputStreamSpy = spy(inputStream);
-        Scanner mockedScanner = new Scanner(inputStreamSpy);
-        ScannerPrintStreamController scannerPrintStreamController =
-                new ScannerPrintStreamController(mockedScanner, mockedOutput);
-        scannerPrintStreamController.takeAndExecuteCommand();
-        //BARK!!!
-        int twoToThirteenth = 8192;
-        byte[] bytesRead = Arrays.copyOf(commandBytes, twoToThirteenth);
-        verify(inputStreamSpy).read(
-                bytesRead,
-                0,
-                twoToThirteenth
-        );
-        verify(mockedOutput).println(Double.toString(4));
-    }
-
-    @Test
-    public void ControllerTakeAndExecuteRectangleAreaCommandTest() throws IOException {
-        PrintStream mockedOutput = mock(PrintStream.class);
-        String command = Command.area.name() + " " + Figure.rectangle.name() + " 2 3\n";
-        byte[] commandBytes = command.getBytes();
-        InputStream inputStream = new ByteArrayInputStream(commandBytes);
-        InputStream inputStreamSpy = spy(inputStream);
-        Scanner mockedScanner = new Scanner(inputStreamSpy);
-        ScannerPrintStreamController scannerPrintStreamController =
-                new ScannerPrintStreamController(mockedScanner, mockedOutput);
-        scannerPrintStreamController.takeAndExecuteCommand();
-        //BARK!!!
-        int twoToThirteenth = 8192;
-        byte[] bytesRead = Arrays.copyOf(commandBytes, twoToThirteenth);
-        verify(inputStreamSpy).read(
-                bytesRead,
-                0,
-                twoToThirteenth
-        );
+        verify(mockedOutput).println(HelloCommandModel.getOutputMessage());
         verify(mockedOutput).println(Double.toString(2 * 3));
+        verify(mockedOutput).println(Double.toString(2 * 2));
+        verify(mockedOutput).println(Double.toString(1 * 1 * Math.PI));
+        assertFalse(scannerPrintStreamController.isWorking());
     }
 
 }
