@@ -1,6 +1,10 @@
 package com.marcinswiderski.portfolio.areacalculator.controller;
 
-import com.marcinswiderski.portfolio.areacalculator.model.*;
+import com.marcinswiderski.portfolio.areacalculator.model.command.Command;
+import com.marcinswiderski.portfolio.areacalculator.model.command.CommandModel;
+import com.marcinswiderski.portfolio.areacalculator.model.command.CommandModelFactory;
+import com.marcinswiderski.portfolio.areacalculator.model.command.CommandParser;
+import com.marcinswiderski.portfolio.areacalculator.model.result.Result;
 import com.marcinswiderski.portfolio.areacalculator.view.View;
 
 import java.io.PrintStream;

@@ -1,6 +1,6 @@
 package com.marcinswiderski.portfolio.areacalculator.test;
 
-import com.marcinswiderski.portfolio.areacalculator.model.Command;
+import com.marcinswiderski.portfolio.areacalculator.model.command.Command;
 import org.junit.Test;
 
 import static org.junit.Assert.assertNotNull;

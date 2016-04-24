@@ -1,4 +1,7 @@
-package com.marcinswiderski.portfolio.areacalculator.model;
+package com.marcinswiderski.portfolio.areacalculator.model.command;
+
+import com.marcinswiderski.portfolio.areacalculator.model.command.area.AreaArgumentsParser;
+import com.marcinswiderski.portfolio.areacalculator.model.command.area.ArgumentsParser;
 
 public class ArgumentParserFactory {
     public static ArgumentsParser getParser(Command command) {

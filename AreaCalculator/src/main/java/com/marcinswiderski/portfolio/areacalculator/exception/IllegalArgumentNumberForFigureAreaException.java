@@ -1,6 +1,6 @@
 package com.marcinswiderski.portfolio.areacalculator.exception;
 
-import com.marcinswiderski.portfolio.areacalculator.model.Figure;
+import com.marcinswiderski.portfolio.areacalculator.model.figure.Figure;
 
 public class IllegalArgumentNumberForFigureAreaException extends RuntimeException {
     public IllegalArgumentNumberForFigureAreaException(Figure figure) {

@@ -1,9 +1,9 @@
 package com.marcinswiderski.portfolio.areacalculator.test;
 
 import com.marcinswiderski.portfolio.areacalculator.controller.ScannerPrintStreamController;
-import com.marcinswiderski.portfolio.areacalculator.model.Command;
-import com.marcinswiderski.portfolio.areacalculator.model.Figure;
-import com.marcinswiderski.portfolio.areacalculator.model.HelloCommandModel;
+import com.marcinswiderski.portfolio.areacalculator.model.command.Command;
+import com.marcinswiderski.portfolio.areacalculator.model.command.hello.HelloCommandModel;
+import com.marcinswiderski.portfolio.areacalculator.model.figure.Figure;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;

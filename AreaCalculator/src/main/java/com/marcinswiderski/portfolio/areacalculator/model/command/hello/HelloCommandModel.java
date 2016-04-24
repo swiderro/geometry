@@ -1,4 +1,7 @@
-package com.marcinswiderski.portfolio.areacalculator.model;
+package com.marcinswiderski.portfolio.areacalculator.model.command.hello;
+
+import com.marcinswiderski.portfolio.areacalculator.model.command.CommandModel;
+import com.marcinswiderski.portfolio.areacalculator.model.result.Result;
 
 import java.util.List;
 

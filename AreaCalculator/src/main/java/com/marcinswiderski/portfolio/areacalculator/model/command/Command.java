@@ -1,4 +1,4 @@
-package com.marcinswiderski.portfolio.areacalculator.model;
+package com.marcinswiderski.portfolio.areacalculator.model.command;
 
 public enum Command {
     area(2, 3),

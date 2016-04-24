@@ -1,4 +1,4 @@
-package com.marcinswiderski.portfolio.areacalculator.model;
+package com.marcinswiderski.portfolio.areacalculator.model.command.area;
 
 import java.util.List;
 

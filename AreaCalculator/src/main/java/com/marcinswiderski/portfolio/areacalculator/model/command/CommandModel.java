@@ -1,5 +1,6 @@
-package com.marcinswiderski.portfolio.areacalculator.model;
+package com.marcinswiderski.portfolio.areacalculator.model.command;
 
+import com.marcinswiderski.portfolio.areacalculator.model.result.Result;
 import com.marcinswiderski.portfolio.areacalculator.view.View;
 import com.marcinswiderski.portfolio.areacalculator.view.ViewFactory;
 

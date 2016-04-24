@@ -1,6 +1,7 @@
-package com.marcinswiderski.portfolio.areacalculator.model;
+package com.marcinswiderski.portfolio.areacalculator.model.command.area;
 
 import com.marcinswiderski.portfolio.areacalculator.exception.IllegalArgumentNumberForFigureAreaException;
+import com.marcinswiderski.portfolio.areacalculator.model.figure.Figure;
 
 import java.util.LinkedList;
 import java.util.List;

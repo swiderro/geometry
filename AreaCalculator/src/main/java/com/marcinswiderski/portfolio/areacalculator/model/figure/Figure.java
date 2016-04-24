@@ -1,4 +1,4 @@
-package com.marcinswiderski.portfolio.areacalculator.model;
+package com.marcinswiderski.portfolio.areacalculator.model.figure;
 
 public enum Figure {
     circle(1),

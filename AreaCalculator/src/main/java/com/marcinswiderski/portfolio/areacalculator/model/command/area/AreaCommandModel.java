@@ -1,4 +1,12 @@
-package com.marcinswiderski.portfolio.areacalculator.model;
+package com.marcinswiderski.portfolio.areacalculator.model.command.area;
+
+import com.marcinswiderski.portfolio.areacalculator.model.command.ArgumentParserFactory;
+import com.marcinswiderski.portfolio.areacalculator.model.command.Command;
+import com.marcinswiderski.portfolio.areacalculator.model.command.CommandModel;
+import com.marcinswiderski.portfolio.areacalculator.model.figure.Figure;
+import com.marcinswiderski.portfolio.areacalculator.model.figure.FigureAreaExecutor;
+import com.marcinswiderski.portfolio.areacalculator.model.figure.FigureAreaExecutorFactory;
+import com.marcinswiderski.portfolio.areacalculator.model.result.Result;
 
 import java.util.List;
 
