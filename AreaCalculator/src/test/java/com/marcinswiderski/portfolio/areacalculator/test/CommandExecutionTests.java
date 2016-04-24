@@ -12,16 +12,13 @@ import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class CommandExecutionTests {
 
     @Test
     public void ControllerTakeAndExecuteHelloCommandTest() throws IOException {
-//        PrintStream mockedOutput = mock(PrintStream.class);
-        PrintStream mockedOutputOriginal = System.out;
-        PrintStream mockedOutput = spy(mockedOutputOriginal);
+        PrintStream mockedOutput = mock(PrintStream.class);
         String command = Command.hello.name() + "\n";
         byte[] commandBytes = command.getBytes();
         InputStream inputStream = new ByteArrayInputStream(commandBytes);
