@@ -71,6 +71,9 @@ public class CommandExecutionTests {
                 area.name() + " " + rectangle.name() + " 2 3\n",
                 area.name() + " " + square.name() + " 2\n",
                 area.name() + " " + circle.name() + " 1\n",
+                "showall\n",
+                "showall dashed\n",
+                "showall dotted\n",
                 exit.name() + "\n"
         };
         byte[] commandBytes = (Arrays.asList(commands).stream().collect(Collectors.joining())).getBytes();
@@ -79,8 +82,12 @@ public class CommandExecutionTests {
         Scanner mockedScanner = new Scanner(inputStreamSpy);
         ScannerPrintStreamController scannerPrintStreamController =
                 new ScannerPrintStreamController(mockedScanner, mockedOutput);
+        String[][] commandsSplited = new String[commands.length][];
+        int i = 0;
         for (String command : commands) {
             scannerPrintStreamController.takeAndExecuteCommand();
+            commandsSplited[i] = commands[i].trim().split(" ");
+            i++;
         }
         //BARK!!!
         int twoToThirteenth = 8192;
@@ -94,6 +101,21 @@ public class CommandExecutionTests {
         verify(mockedOutput).println(Double.toString(2 * 3));
         verify(mockedOutput).println(Double.toString(2 * 2));
         verify(mockedOutput).println(Double.toString(1 * 1 * Math.PI));
+        verify(mockedOutput).println("DEFAULT REPORT" + "\n\n" +
+                        commands[1].trim() + " = " + Double.toString(2 * 3) + "\n\n" +
+                        commands[2].trim() + " = " + Double.toString(2 * 2) + "\n\n" +
+                        commands[3].trim() + " = " + Double.toString(1 * 1 * Math.PI) + "\n\n"
+        );
+        verify(mockedOutput).println("DASHED REPORT" + "____________________________________________________________\n\n" +
+                        commands[1].trim() + " = " + Double.toString(2 * 3) + "____________________________________________________________\n\n" +
+                        commands[2].trim() + " = " + Double.toString(2 * 2) + "____________________________________________________________\n\n" +
+                        commands[3].trim() + " = " + Double.toString(1 * 1 * Math.PI) + "____________________________________________________________\n\n"
+        );
+        verify(mockedOutput).println("DOTTED REPORT" + "............................................................\n\n" +
+                        commands[1].trim() + " = " + Double.toString(2 * 3) + "............................................................\n\n" +
+                        commands[2].trim() + " = " + Double.toString(2 * 2) + "............................................................\n\n" +
+                        commands[3].trim() + " = " + Double.toString(1 * 1 * Math.PI) + "............................................................\n\n"
+        );
         assertFalse(scannerPrintStreamController.isWorking());
     }
 

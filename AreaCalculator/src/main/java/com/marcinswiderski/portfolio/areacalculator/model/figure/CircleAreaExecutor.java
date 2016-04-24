@@ -8,7 +8,7 @@ import java.util.List;
 public class CircleAreaExecutor implements FigureAreaExecutor {
     @Override
     public Result execute(List arguments) {
-        Double r = (Double) arguments.get(0);
+        Double r = (Double) arguments.get(1);
         return new StringResult(Double.toString(r * r * Math.PI));
     }
 }

@@ -24,28 +24,13 @@ public class CommandParser {
     public CommandParser parse(String inputLine) throws IllegalArgumentNumberForFigureAreaException {
         List<String> inputLineExploded = new LinkedList<String>(Arrays.asList(inputLine.split(separator)));
         extractCommand(inputLineExploded);
-//        validateArgumentsNumber(inputLineExploded);
         commandArguments = inputLineExploded;
         valid = true;
         return this;
     }
 
     private void extractCommand(List<String> commandLineArguments) {
-        this.command = Command.valueOf(commandLineArguments.remove(0));
-    }
-
-//    private void validateArgumentsNumber(List<String> commandLineArguments) throws IllegalArgumentNumberForCommandException {
-//        if (commandLineArguments.size() > command.getMaxArgumentsNumber()) {
-//            IllegalArgumentNumberForCommandException exception = new IllegalArgumentNumberForCommandException(command);
-//            invalidate();
-//            throw exception;
-//        }
-//    }
-
-    private void invalidate() {
-        this.valid = false;
-        this.command = null;
-        this.commandArguments = null;
+        this.command = Command.valueOf(commandLineArguments.get(0));
     }
 
     public boolean isValid() {

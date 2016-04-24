@@ -4,10 +4,13 @@ import com.marcinswiderski.portfolio.areacalculator.model.command.Command;
 import com.marcinswiderski.portfolio.areacalculator.model.command.CommandModel;
 import com.marcinswiderski.portfolio.areacalculator.model.command.CommandModelFactory;
 import com.marcinswiderski.portfolio.areacalculator.model.command.CommandParser;
+import com.marcinswiderski.portfolio.areacalculator.model.result.CommandResult;
 import com.marcinswiderski.portfolio.areacalculator.model.result.Result;
 import com.marcinswiderski.portfolio.areacalculator.view.View;
 
 import java.io.PrintStream;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ScannerPrintStreamController {
@@ -24,12 +27,15 @@ public class ScannerPrintStreamController {
         initialMessage = "Welcome to Area Calculator. Please enter a command.";
     }
 
+    private List<CommandResult> commandCache;
+
     public ScannerPrintStreamController(Scanner scanner, PrintStream out) {
         this.scanner = scanner;
         this.output = out;
         working = true;
         prompt = "\ncalculator > ";
         commandParser = new CommandParser();
+        commandCache = new LinkedList<>();
     }
 
     public boolean isWorking() {
@@ -46,7 +52,7 @@ public class ScannerPrintStreamController {
         try {
             Command command = commandParser.parse(commandString).getCommand();
             if (command != FINISH_METHOD) {
-                CommandModel commandModel = CommandModelFactory.getCommandModel(command);
+                CommandModel commandModel = CommandModelFactory.getCommandModel(command, commandCache);
                 Result result = commandModel.execute(commandParser.getCommandArguments());
                 View view = commandModel.getView();
                 output.println(view.getFormattedResult(result));

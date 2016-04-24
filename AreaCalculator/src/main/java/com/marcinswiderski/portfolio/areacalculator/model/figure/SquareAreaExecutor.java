@@ -8,7 +8,7 @@ import java.util.List;
 public class SquareAreaExecutor implements FigureAreaExecutor {
     @Override
     public Result execute(List arguments) {
-        Double a = (Double) arguments.get(0);
+        Double a = (Double) arguments.get(1);
         return new StringResult(Double.toString(a * a));
     }
 }

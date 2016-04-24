@@ -5,7 +5,6 @@ import com.marcinswiderski.portfolio.areacalculator.model.figure.Figure;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AreaArgumentsParser implements ArgumentsParser {
     private boolean valid = false;
@@ -14,13 +13,15 @@ public class AreaArgumentsParser implements ArgumentsParser {
     @Override
     public ArgumentsParser parse(List<String> commandArguments) {
         //will throw exception on unknown figure
-        Figure figure = Figure.valueOf(commandArguments.remove(0));
+        Figure figure = Figure.valueOf(commandArguments.get(1));
         arguments.add(figure);
-        if (commandArguments.size() != figure.getNumOfArgumentsReqForAreaCalculation()) {
+        if (commandArguments.size() - 2 != figure.getNumOfArgumentsReqForAreaCalculation()) {
             throw new IllegalArgumentNumberForFigureAreaException(figure);
         }
         //will throw exception on incorrect number
-        arguments.addAll(commandArguments.stream().map(Double::parseDouble).collect(Collectors.toList()));
+        for (int i = 2; i < commandArguments.size(); i++) {
+            arguments.add(Double.parseDouble(commandArguments.get(i)));
+        }
         valid = true;
         return this;
     }
