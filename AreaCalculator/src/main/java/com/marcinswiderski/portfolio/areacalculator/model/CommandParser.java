@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class InputParser {
+public class CommandParser {
 
     private String separator;
 
@@ -14,17 +14,17 @@ public class InputParser {
     private List<String> commandArguments;
     private Command command;
 
-    public InputParser() {
+    public CommandParser() {
         this.valid = false;
         this.commandArguments = null;
         this.separator = " ";
         this.command = null;
     }
 
-    public InputParser parse(String inputLine) throws IllegalArgumentNumberForCommandException {
+    public CommandParser parse(String inputLine) throws IllegalArgumentNumberForCommandException {
         List<String> inputLineExploded = new LinkedList<String>(Arrays.asList(inputLine.split(separator)));
         extractCommand(inputLineExploded);
-        validateArgumentsNumber(inputLineExploded);
+//        validateArgumentsNumber(inputLineExploded);
         commandArguments = inputLineExploded;
         valid = true;
         return this;
@@ -34,13 +34,13 @@ public class InputParser {
         this.command = Command.valueOf(commandLineArguments.remove(0));
     }
 
-    private void validateArgumentsNumber(List<String> commandLineArguments) throws IllegalArgumentNumberForCommandException {
-        if (commandLineArguments.size() > command.getMaxArgumentsNumber()) {
-            IllegalArgumentNumberForCommandException exception = new IllegalArgumentNumberForCommandException(command);
-            invalidate();
-            throw exception;
-        }
-    }
+//    private void validateArgumentsNumber(List<String> commandLineArguments) throws IllegalArgumentNumberForCommandException {
+//        if (commandLineArguments.size() > command.getMaxArgumentsNumber()) {
+//            IllegalArgumentNumberForCommandException exception = new IllegalArgumentNumberForCommandException(command);
+//            invalidate();
+//            throw exception;
+//        }
+//    }
 
     private void invalidate() {
         this.valid = false;
