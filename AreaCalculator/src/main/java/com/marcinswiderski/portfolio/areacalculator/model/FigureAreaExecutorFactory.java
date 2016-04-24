@@ -5,7 +5,9 @@ public class FigureAreaExecutorFactory {
         switch (figure) {
             case circle:
                 return new CircleAreaExecutor();
+            case square:
+                return new SquareAreaExecutor();
         }
-        throw new IllegalArgumentException("No figure area executor implemented for command: " + figure.name());
+        throw new IllegalArgumentException("No figure area executor implemented for figure: " + figure.name());
     }
 }

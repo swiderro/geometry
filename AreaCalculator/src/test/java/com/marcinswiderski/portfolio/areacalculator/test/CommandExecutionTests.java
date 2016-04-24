@@ -62,9 +62,8 @@ public class CommandExecutionTests {
         assertFalse(scannerPrintStreamController.isWorking());
     }
 
-
     @Test
-    public void ControllerTakeAndExecuteAreaCommandTest() throws IOException {
+    public void ControllerTakeAndExecuteCircleAreaCommandTest() throws IOException {
         PrintStream mockedOutput = mock(PrintStream.class);
         String command = Command.area.name() + " " + Figure.circle.name() + " 1\n";
         byte[] commandBytes = command.getBytes();
@@ -83,6 +82,28 @@ public class CommandExecutionTests {
                 twoToThirteenth
         );
         verify(mockedOutput).println(Double.toString(1 * 1 * Math.PI));
+    }
+
+    @Test
+    public void ControllerTakeAndExecuteSquareAreaCommandTest() throws IOException {
+        PrintStream mockedOutput = mock(PrintStream.class);
+        String command = Command.area.name() + " " + Figure.square.name() + " 2\n";
+        byte[] commandBytes = command.getBytes();
+        InputStream inputStream = new ByteArrayInputStream(commandBytes);
+        InputStream inputStreamSpy = spy(inputStream);
+        Scanner mockedScanner = new Scanner(inputStreamSpy);
+        ScannerPrintStreamController scannerPrintStreamController =
+                new ScannerPrintStreamController(mockedScanner, mockedOutput);
+        scannerPrintStreamController.takeAndExecuteCommand();
+        //BARK!!!
+        int twoToThirteenth = 8192;
+        byte[] bytesRead = Arrays.copyOf(commandBytes, twoToThirteenth);
+        verify(inputStreamSpy).read(
+                bytesRead,
+                0,
+                twoToThirteenth
+        );
+        verify(mockedOutput).println(Double.toString(4));
     }
 
 }
