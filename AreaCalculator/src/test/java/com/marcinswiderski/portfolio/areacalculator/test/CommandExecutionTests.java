@@ -106,4 +106,26 @@ public class CommandExecutionTests {
         verify(mockedOutput).println(Double.toString(4));
     }
 
+    @Test
+    public void ControllerTakeAndExecuteRectangleAreaCommandTest() throws IOException {
+        PrintStream mockedOutput = mock(PrintStream.class);
+        String command = Command.area.name() + " " + Figure.rectangle.name() + " 2 3\n";
+        byte[] commandBytes = command.getBytes();
+        InputStream inputStream = new ByteArrayInputStream(commandBytes);
+        InputStream inputStreamSpy = spy(inputStream);
+        Scanner mockedScanner = new Scanner(inputStreamSpy);
+        ScannerPrintStreamController scannerPrintStreamController =
+                new ScannerPrintStreamController(mockedScanner, mockedOutput);
+        scannerPrintStreamController.takeAndExecuteCommand();
+        //BARK!!!
+        int twoToThirteenth = 8192;
+        byte[] bytesRead = Arrays.copyOf(commandBytes, twoToThirteenth);
+        verify(inputStreamSpy).read(
+                bytesRead,
+                0,
+                twoToThirteenth
+        );
+        verify(mockedOutput).println(Double.toString(2 * 3));
+    }
+
 }

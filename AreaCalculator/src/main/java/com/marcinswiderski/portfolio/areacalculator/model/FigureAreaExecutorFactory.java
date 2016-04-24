@@ -7,6 +7,8 @@ public class FigureAreaExecutorFactory {
                 return new CircleAreaExecutor();
             case square:
                 return new SquareAreaExecutor();
+            case rectangle:
+                return new RectangleAreaExecutor();
         }
         throw new IllegalArgumentException("No figure area executor implemented for figure: " + figure.name());
     }
